@@ -11,6 +11,8 @@ import SwiftUI
 struct MainGameView: View {
     @ObservedObject var gameData = GameData()
     @State var stage = 0
+    @Binding var showingGame: String
+    
     let gridcolumn = [GridItem(.flexible()),
                       GridItem(.flexible()),
                       GridItem(.flexible()),
@@ -23,7 +25,7 @@ struct MainGameView: View {
             VStack {
                 VStack { //HalfTop
                     Button (action: {
-                        print("")
+                        showingGame = "pause"
                     }){
                         Image("MENU")
                             .resizable()
@@ -32,23 +34,46 @@ struct MainGameView: View {
                     .position(x: geometry.size.width-70, y: 75)
                     HStack {
                         VStack {
-                            Image("HP")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                            Image("Player2")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 160, height: 160)
+                            HStack{
+                                Image("HP")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                Text("HP : \(gameData.modelStage.getHpPlayer())").font(.title).bold().italic()
+                            }
+                            if gameData.modelStage.getPlayerModel().istrue{
+                                Image("Player2")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 160, height: 160)
+                            }
+                            else{
+                                Image("")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 160, height: 160)
+                            }
                         }
                         Spacer()
                         VStack {
-                            Image("HP")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                            Image("M01_GreenPoring")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 180, height: 180)
+                            HStack{
+                                Text("HP : \(gameData.modelStage.getHpMonster(stage: stage))").font(.title).bold().italic()
+                                Image("HP")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                            }
+                            if gameData.modelStage.getmonsterModel(stage: stage).istrue{
+                                Image("M01_GreenPoring")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 160, height: 160)
+                            }
+                            else{
+                                Image("")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 160, height: 160)
+                            }
+                            
                         }
                     }
                     
@@ -87,11 +112,12 @@ struct MainGameView: View {
                             ForEach(gameData.alphabet.getAlphabetList()){obj in
                                 if obj.istrue{
                                     Button(action: {
-                                        gameData.setAnswerShow(onTap: obj.content)
-                                        if gameData.checkAnswer(onTap: obj.content){
-                                            gameData.setAlphaShow(onTap: obj.content)
+                                        if gameData.checkAnswer(onTap: obj.content){ //vocab is true
+                                            gameData.setAnswerShow(onTap: obj.content) //show Answer
+                                            gameData.modelStage.atkToMonster(stage: stage) //Atk monster
+                                            gameData.setAlphaShow(onTap: obj.content) //close Alpha
                                         }else{
-                                            print("อิไตโย")
+                                            gameData.modelStage.atkToplayer(stage: stage)
                                         }
                                     }){
                                         Image(obj.content)
@@ -124,6 +150,6 @@ struct MainGameView: View {
  }*/
 struct MainGameView_Previews: PreviewProvider {
     static var previews: some View {
-        MainGameView()
+        MainGameView(showingGame: .constant("play"))
     }
 }

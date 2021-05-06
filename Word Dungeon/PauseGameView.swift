@@ -1,52 +1,48 @@
 //
-//  HomeScreenView.swift
+//  PauseGameView.swift
 //  WordDungeon
 //
-//  Created by Teerat Prasitwet on 5/1/21.
+//  Created by Teerat Prasitwet on 5/5/21.
 //
 
 import Foundation
 import SwiftUI
 
-struct HomeScreenView: View {
+struct PauseGameView: View {
     @Binding var showingGame: String
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack {
-            Image("WordDungeonLogo")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 380, height: 380)
             Button(action:{
                 showingGame = "play"
             }){
-                Image("NEW GAME")
+                Image("RESUME")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200, height: 60)
             }
+            .padding()
             Button(action:{
-                print("Continue")
+                showingGame = ""
             }){
-                Image("CONTINUE")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 200, height: 60)
-            }
-            Button(action:{
-                print("exit")
-            }){
-                Image("EXIT")
+                Image("MAIN_MANU")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200, height: 60)
             }
         }
-        .background(Image("BR01")
+        .background(Image("BR02")
                         .resizable()
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                         .scaledToFill()
                         .edgesIgnoringSafeArea(.all))
+        
     }
 }
 
+struct PauseGameView_Previews: PreviewProvider {
+    static var previews: some View {
+        PauseGameView(showingGame: .constant("pause"))
+    }
+}

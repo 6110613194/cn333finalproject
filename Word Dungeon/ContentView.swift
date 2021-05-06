@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showingGame = false
+    @State private var showingGame : String = ""
     
     var body: some View {
-        if showingGame {
-            MainGameView()
-        } else {
+        if showingGame == "play" {
+            MainGameView(showingGame: $showingGame)
+        }else if showingGame == "status"{
+            StatusGameView(showingGame: $showingGame)
+        }
+        else if showingGame == "pause"{
+            PauseGameView(showingGame: $showingGame)
+        }
+        else {
             HomeScreenView(showingGame: $showingGame)
         }
     }
