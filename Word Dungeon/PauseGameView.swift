@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PauseGameView: View {
     @Binding var showingGame: String
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var stage = 0
     
     var body: some View {
         VStack {

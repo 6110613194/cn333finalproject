@@ -114,8 +114,10 @@ struct MainGameView: View {
                                     Button(action: {
                                         if gameData.checkAnswer(onTap: obj.content){ //vocab is true
                                             gameData.setAnswerShow(onTap: obj.content) //show Answer
-                                            gameData.modelStage.atkToMonster(stage: stage) //Atk monster
                                             gameData.setAlphaShow(onTap: obj.content) //close Alpha
+                                            if gameData.vocabularyStage.iscomplete(){
+                                                gameData.modelStage.atkToMonster(stage: stage)
+                                            }
                                         }else{
                                             gameData.modelStage.atkToplayer(stage: stage)
                                         }
@@ -131,6 +133,25 @@ struct MainGameView: View {
                                 
                             }
                         }
+                        
+                    }
+                    HStack{
+                        if gameData.modelStage.getmonsterModel(stage: stage).istrue{
+                            Image("")
+                                .resizable()
+                                .frame(width: 150, height: 75, alignment: .center)
+                        }
+                        else{
+                            Button(action:{
+                                gameData.stageChanger()
+                                //showingGame = "status"
+                            }) {
+                                Image("CONTINUE")
+                                    .resizable()
+                                    .frame(width: 150, height: 75, alignment: .center)
+                            }
+                        }
+                        
                     }
                     
                     

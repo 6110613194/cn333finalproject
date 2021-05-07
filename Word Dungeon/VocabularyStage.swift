@@ -32,6 +32,15 @@ struct VocabularyStage{
     mutating func setShowChar(index:Int,set :Bool){
         CharacterList[index].istrue = set
     }
+    func iscomplete() -> Bool {
+        let complete = true
+        for i in CharacterList{
+            if i.istrue == false{
+                return false
+            }
+        }
+        return complete
+    }
 }
 struct CharacterObj: Identifiable {
     var id : UUID

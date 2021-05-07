@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var showingGame : String = ""
-    
+    @State var stage = 0
     var body: some View {
         if showingGame == "play" {
             MainGameView(showingGame: $showingGame)
