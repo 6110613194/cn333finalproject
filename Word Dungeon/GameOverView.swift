@@ -18,7 +18,7 @@ struct GameOverView: View {
             Button(action:{
                 showingGame = ""
             }){
-                Image("MAIN_MANU")
+                Image("MAIN_MENU")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200, height: 60)

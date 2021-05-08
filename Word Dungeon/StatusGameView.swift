@@ -11,23 +11,23 @@ import SwiftUI
 struct StatusGameView: View {
     @Binding var showingGame: String
     var body: some View {
-        
-        Text("Upgrade Your Status")
-        Button(action:{
-            showingGame = "play"
-        }){
-            Image("CONTINUE")
+        VStack {
+            Image("StatusUpgradeLogo")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 200, height: 60)
-        }
-        Button(action:{
-            showingGame = ""
-        }){
-            Image("EXIT")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 200, height: 60)
+                .frame(width: 380, height: 380)
+            Spacer()
+            HStack {
+                Image("Player")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 300, height: 300)
+                VStack {
+                    HStack {
+                        
+                    }
+                }
+            }
         }
         
     }

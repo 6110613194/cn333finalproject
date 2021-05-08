@@ -9,14 +9,22 @@ import Foundation
 
 struct ModelStage {
     private var playerModelList: [PlayerModel] = [
-        PlayerModel(imageURL: "Player2", HP: 1000, ATK: 1000, DEF: 20, CRIT: 15, EVA: 10,isAlive:true)]
+        PlayerModel(imageURL: "Player", HP: 1000, ATK: 100, DEF: 20, CRIT: 15, EVA: 10, isAlive: true),
+        PlayerModel(imageURL: "Player", HP: 1000, ATK: 100, DEF: 20, CRIT: 15, EVA: 10, isAlive: true),
+        PlayerModel(imageURL: "Player", HP: 1000, ATK: 100, DEF: 20, CRIT: 15, EVA: 10, isAlive: true),
+        PlayerModel(imageURL: "Player", HP: 1000, ATK: 100, DEF: 20, CRIT: 15, EVA: 10, isAlive: true),
+        PlayerModel(imageURL: "Player", HP: 1000, ATK: 100, DEF: 20, CRIT: 15, EVA: 10, isAlive: true),
+        PlayerModel(imageURL: "Player", HP: 1000, ATK: 100, DEF: 20, CRIT: 15, EVA: 10, isAlive: true),
+        PlayerModel(imageURL: "Player", HP: 1000, ATK: 100, DEF: 20, CRIT: 15, EVA: 10, isAlive: true)]
     private var monsterModelList: [MonsterModel] = [
-        MonsterModel(imageURL: "M01_GreenPoring", HP: 500, ATK: 200, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
-        MonsterModel(imageURL: "M02_MudHand", HP: 80, ATK: 10, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
-        MonsterModel(imageURL: "M03_LionWhat", HP: 150, ATK: 15, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
-        MonsterModel(imageURL: "M04_KidBlueDragon", HP: 200, ATK: 20, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
-        MonsterModel(imageURL: "M05_EyeWing", HP: 300, ATK: 35, DEF: 20, CRIT: 15, EVA: 20,isAlive:true),
-        MonsterModel(imageURL: "M06_PterosaurHerd", HP: 250, ATK: 25, DEF: 10, CRIT: 10, EVA: 10,isAlive:true)
+        MonsterModel(imageURL: "M01_GreenPoring_Shadow", HP: 5, ATK: 2, DEF: 1, CRIT: 1, EVA: 1, isAlive: true),
+        MonsterModel(imageURL: "M02_MudHand_Shadow", HP: 80, ATK: 10, DEF: 1, CRIT: 1, EVA: 1, isAlive: true),
+        MonsterModel(imageURL: "M03_LionWhat_Shadow", HP: 100, ATK: 15, DEF: 1, CRIT: 1, EVA: 1, isAlive: true),
+        MonsterModel(imageURL: "M04_KidBlueDragon_Shadow", HP: 120, ATK: 20, DEF: 1, CRIT: 1, EVA: 1, isAlive: true),
+        MonsterModel(imageURL: "M05_EyeWing_Shadow", HP: 200, ATK: 35, DEF: 15, CRIT: 10, EVA: 15, isAlive: true),
+        MonsterModel(imageURL: "M06_PterosaurHerd_Shadow", HP: 120, ATK: 25, DEF: 5, CRIT: 5, EVA: 5, isAlive: true),
+        MonsterModel(imageURL: "M07_OctopusDragon_Shadow", HP: 130, ATK: 30, DEF: 10, CRIT: 5, EVA: 5, isAlive: true),
+        MonsterModel(imageURL: "M08_BlueInsect_Shadow", HP: 125, ATK: 25, DEF: 1, CRIT: 5, EVA: 15, isAlive: true)
     ]
     var stage: Int
     var playerStage: PlayerModel
@@ -24,14 +32,16 @@ struct ModelStage {
     
     init(stage: Int) {
         self.stage = stage
-        if stage != 0 {
-            var createplayobj = playerModelList[stage-1]
-            playerModelList.append(createplayobj)
-        }
-        playerStage = playerModelList[stage]
+        playerStage = playerModelList[stage/5]
         monsterStage = monsterModelList[stage]
     }
-    
+    mutating func upgradePlayerModel(stage: Int, iHP: Int, iATK: Int, iDEF: Int, iCRIT: Int, iEVA: Int) {
+        playerModelList[stage/5].HP = iHP
+        playerModelList[stage/5].ATK = iATK
+        playerModelList[stage/5].DEF = iDEF
+        playerModelList[stage/5].CRIT = iCRIT
+        playerModelList[stage/5].EVA = iEVA
+    }
     mutating func changeMonster(stage: Int) {
         self.stage = stage
         monsterStage = monsterModelList[stage]

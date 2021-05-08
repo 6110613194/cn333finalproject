@@ -25,8 +25,8 @@ struct MainGameView: View {
             VStack {
                 VStack { //HalfTop
                     Menu{
-                        Button("Resume", action: resume)
-                        Button("Exit", action: exit)
+                        Button("RESUME", action: resume)
+                        Button("MAIN MENU", action: main_menu)
                         
                     }label:{
                         HStack{
@@ -54,13 +54,13 @@ struct MainGameView: View {
                                 Text("HP : \(gameData.modelStage.getHpPlayer())").font(.title).bold().italic()
                             }
                             if gameData.modelStage.getPlayerModel().isAlive{
-                                Image("Player2")
+                                Image("Player")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 160, height: 160)
                             }
                             else{
-                                Image("")
+                                Image("Player_Die")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 160, height: 160)
@@ -169,10 +169,11 @@ struct MainGameView: View {
                         }
                         else{
                             Button(action:{
-                        
-                                
-                                gameData.stageChanger()
-                                print(gameData.modelStage.getPlayerModelList())
+                                if ((gameData.stage + 1) % 5) != 0 {
+                                    gameData.stageChanger()
+                                } else {
+                                    gameData.stageChangerNewMap()
+                                }
                                 //showingGame = "status"
                             }) {
                                 Image("CONTINUE")
@@ -194,7 +195,7 @@ struct MainGameView: View {
         }.edgesIgnoringSafeArea(.all)
     }
     func resume() {}
-    func exit() {
+    func main_menu() {
         showingGame = ""
     }
     func cancelOrder() { }
@@ -216,7 +217,7 @@ struct Pause: View {
             Button(action:{
                 showingGame = ""
             }){
-                Image("MAIN_MANU")
+                Image("MAIN_MENU")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200, height: 60)

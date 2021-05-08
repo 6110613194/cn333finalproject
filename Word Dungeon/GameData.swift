@@ -22,8 +22,15 @@ class GameData: ObservableObject {
     func stageChanger() {
         stage = stage + 1
         vocabularyStage = VocabularyStage(stage: stage)
-        modelStage = ModelStage(stage: stage)
         alphabet = Alphabet(stage: stage)
+        modelStage.changeMonster(stage: stage)
+    }
+    
+    func stageChangerNewMap() {
+        stage = stage + 1
+        vocabularyStage = VocabularyStage(stage: stage)
+        alphabet = Alphabet(stage: stage)
+        modelStage = ModelStage(stage: stage)
     }
     
     func stageNewVocab() {
