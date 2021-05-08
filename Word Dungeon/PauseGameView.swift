@@ -41,8 +41,8 @@ struct PauseGameView: View {
     }
 }
 
-struct PauseGameView_Previews: PreviewProvider {
+/*struct PauseGameView_Previews: PreviewProvider {
     static var previews: some View {
         PauseGameView(showingGame: .constant("pause"))
     }
-}
+}*/

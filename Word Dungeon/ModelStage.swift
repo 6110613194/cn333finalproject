@@ -33,14 +33,17 @@ struct ModelStage {
     func getPlayerModel() -> PlayerModel {
         return playerModel
     }
-    func getmonsterModel(stage:Int) -> MonsterModel {
-        return monsterModelList[stage]
+    func getMonsterModel() -> MonsterModel {
+        return monsterStage
+    }
+    func getMonsterPic() -> String {
+        return monsterStage.imageURL
     }
     func getHpPlayer() -> Int {
         return playerModel.HP
     }
-    func getHpMonster(stage: Int) -> Int {
-        return monsterModelList[stage].HP
+    func getHpMonster() -> Int {
+        return monsterStage.HP
     }
     func randomAtk(Atk :Int) -> Double {
         let persent = Int.random(in: 100..<121)
@@ -49,27 +52,27 @@ struct ModelStage {
     func randomPersent(percentage :Int) -> Bool {
         return arc4random_uniform(100) < percentage
     }
-    mutating func atkToMonster(stage: Int) {
-        let atkplayer = playerModel.ATK
-        let critplayer = playerModel.CRIT
-        let hpMonster = monsterModelList[stage].HP
-        let defMonster = monsterModelList[stage].DEF
-        let evaMonster = 100-monsterModelList[stage].EVA
+    mutating func atkToMonster() {
+        let atkPlayer = playerModel.ATK
+        let critPlayer = playerModel.CRIT
+        let hpMonster = monsterStage.HP
+        let defMonster = monsterStage.DEF
+        let evaMonster = 100-monsterStage.EVA
         if randomPersent(percentage: evaMonster){
-            if randomPersent(percentage: critplayer){
-                monsterModelList[stage].HP = hpMonster - Int(randomAtk(Atk: atkplayer)*((100.0 - Double(defMonster))/100.0))*2
+            if randomPersent(percentage: critPlayer){
+                monsterStage.HP = hpMonster - Int(randomAtk(Atk: atkPlayer)*((100.0 - Double(defMonster))/100.0))*2
             }
             else{
-                monsterModelList[stage].HP = hpMonster - Int(randomAtk(Atk: atkplayer)*((100.0 - Double(defMonster))/100.0))
+                monsterStage.HP = hpMonster - Int(randomAtk(Atk: atkPlayer)*((100.0 - Double(defMonster))/100.0))
             }
-            if monsterModelList[stage].HP <= 0{
-                monsterModelList[stage].istrue = false
+            if monsterStage.HP <= 0{
+                monsterStage.istrue = false
             }
         }
     }
-    mutating func atkToplayer(stage: Int) {
-        let atkMonster = monsterModelList[stage].ATK
-        let critMonster = monsterModelList[stage].CRIT
+    mutating func atkToPlayer() {
+        let atkMonster = monsterStage.ATK
+        let critMonster = monsterStage.CRIT
         let hpPlayer = playerModel.HP
         let defPlayer = playerModel.DEF
         let evaPlayer = 100-playerModel.EVA

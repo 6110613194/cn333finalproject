@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 
 class GameRepository : ObservableObject{
-    private var db = Firestore.firestore()
+    //private var db = Firestore.firestore()
     
     
 }

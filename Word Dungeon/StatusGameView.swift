@@ -33,8 +33,8 @@ struct StatusGameView: View {
     }
 }
 
-struct StatusGameView_Previews: PreviewProvider {
+/*struct StatusGameView_Previews: PreviewProvider {
     static var previews: some View {
         StatusGameView(showingGame: .constant("status"))
     }
-}
+}*/

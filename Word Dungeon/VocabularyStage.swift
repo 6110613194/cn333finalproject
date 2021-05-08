@@ -8,7 +8,10 @@
 import Foundation
 
 struct VocabularyStage{
-    private let vocabularyList = [["DISADVANTAGE"],["CAT","DOG","ANT"],["BIRD","KING","GANK"]]
+    private let vocabularyList = [["CAT","DOG","ANT"],
+                                  ["BIRD","KING","GANK"],
+                                  ["WHOSE","OMEGA","ABOUT"],
+                                  ["STUDIO","VISUAL","IMPACT"]]
     var stage: Int
     var vocabStageList: [String] = []
     var vocabStageShow: [String] = []

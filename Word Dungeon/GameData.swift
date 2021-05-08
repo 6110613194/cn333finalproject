@@ -8,10 +8,10 @@
 import Foundation
 
 class GameData: ObservableObject {
-    var stage:Int = 0
+    var stage: Int = 0
     @Published var vocabularyStage = VocabularyStage(stage: 0)
     private var showVocabCard: [String] = []
-    @Published var alphabet = Alphabet()
+    @Published var alphabet = Alphabet(stage: 0)
     @Published var modelStage = ModelStage(stage: 0)
     
     func vocabAnswerList() -> [String] {
@@ -23,6 +23,7 @@ class GameData: ObservableObject {
         self.stage = self.stage + 1
         vocabularyStage = VocabularyStage(stage: stage)
         modelStage = ModelStage(stage: stage)
+        alphabet = Alphabet(stage: stage)
     }
     
     func checkAnswer(onTap: String)-> Bool{

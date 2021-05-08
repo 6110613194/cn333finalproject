@@ -29,9 +29,9 @@ struct MainGameView: View {
                     }){
                         Image("MENU")
                             .resizable()
-                            .frame(width: 80, height: 80)
+                            .frame(width: 70, height: 70)
                     }
-                    .position(x: geometry.size.width-70, y: 75)
+                    .position(x: geometry.size.width-50, y: 75)
                     HStack {
                         VStack {
                             HStack{
@@ -56,13 +56,13 @@ struct MainGameView: View {
                         Spacer()
                         VStack {
                             HStack{
-                                Text("HP : \(gameData.modelStage.getHpMonster(stage: stage))").font(.title).bold().italic()
+                                Text("HP : \(gameData.modelStage.getHpMonster())").font(.title).bold().italic()
                                 Image("HP")
                                     .resizable()
                                     .frame(width: 40, height: 40)
                             }
-                            if gameData.modelStage.getmonsterModel(stage: stage).istrue{
-                                Image("M01_GreenPoring")
+                            if gameData.modelStage.getMonsterModel().istrue{
+                                Image(gameData.modelStage.getMonsterPic())
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 160, height: 160)
@@ -116,10 +116,10 @@ struct MainGameView: View {
                                             gameData.setAnswerShow(onTap: obj.content) //show Answer
                                             gameData.setAlphaShow(onTap: obj.content) //close Alpha
                                             if gameData.vocabularyStage.iscomplete(){
-                                                gameData.modelStage.atkToMonster(stage: stage)
+                                                gameData.modelStage.atkToMonster()
                                             }
                                         }else{
-                                            gameData.modelStage.atkToplayer(stage: stage)
+                                            gameData.modelStage.atkToPlayer()
                                         }
                                     }){
                                         Image(obj.content)
@@ -136,7 +136,7 @@ struct MainGameView: View {
                         
                     }
                     HStack{
-                        if gameData.modelStage.getmonsterModel(stage: stage).istrue{
+                        if gameData.modelStage.getMonsterModel().istrue{
                             Image("")
                                 .resizable()
                                 .frame(width: 150, height: 75, alignment: .center)
@@ -169,8 +169,8 @@ struct MainGameView: View {
 /*struct AlphabetButton: View {
  
  }*/
-struct MainGameView_Previews: PreviewProvider {
+/*struct MainGameView_Previews: PreviewProvider {
     static var previews: some View {
         MainGameView(showingGame: .constant("play"))
     }
-}
+}*/
