@@ -26,6 +26,11 @@ class GameData: ObservableObject {
         alphabet = Alphabet(stage: stage)
     }
     
+    func stageNewVocab() {
+        vocabularyStage = VocabularyStage(stage: stage)
+        alphabet = Alphabet(stage: stage)
+    }
+    
     func checkAnswer(onTap: String)-> Bool{
         var check: Bool = false
         for CharObj in vocabularyStage.getCharList() {

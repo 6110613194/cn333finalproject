@@ -33,14 +33,6 @@ struct HomeScreenView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200, height: 60)
             }
-            Button(action:{
-                print("exit")
-            }){
-                Image("EXIT")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 200, height: 60)
-            }
         }
         .background(Image("BR01")
                         .resizable()

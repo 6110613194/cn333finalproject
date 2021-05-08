@@ -35,7 +35,7 @@ struct VocabularyStage{
     mutating func setShowChar(index:Int,set :Bool){
         CharacterList[index].istrue = set
     }
-    func iscomplete() -> Bool {
+    func isComplete() -> Bool {
         let complete = true
         for i in CharacterList{
             if i.istrue == false{

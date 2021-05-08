@@ -8,21 +8,23 @@
 import Foundation
 
 struct ModelStage {
-    private var playerModel: PlayerModel
+    private var playerModelList: [PlayerModel] = [
+        PlayerModel(imageURL: "Player2", HP: 1000, ATK: 100, DEF: 20, CRIT: 15, EVA: 10,isAlive:true)]
     private var monsterModelList: [MonsterModel] = [
-        MonsterModel(imageURL: "M01_GreenPoring", HP: 5, ATK: 5, DEF: 1, CRIT: 1, EVA: 1,istrue:true),
-        MonsterModel(imageURL: "M02_MudHand", HP: 80, ATK: 10, DEF: 1, CRIT: 1, EVA: 1,istrue:true),
-        MonsterModel(imageURL: "M03_LionWhat", HP: 150, ATK: 15, DEF: 1, CRIT: 1, EVA: 1,istrue:true),
-        MonsterModel(imageURL: "M04_KidBlueDragon", HP: 200, ATK: 20, DEF: 1, CRIT: 1, EVA: 1,istrue:true),
-        MonsterModel(imageURL: "M05_EyeWing", HP: 300, ATK: 35, DEF: 20, CRIT: 15, EVA: 20,istrue:true),
-        MonsterModel(imageURL: "M06_PterosaurHerd", HP: 250, ATK: 25, DEF: 10, CRIT: 10, EVA: 10,istrue:true)
+        MonsterModel(imageURL: "M01_GreenPoring", HP: 500, ATK: 2, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
+        MonsterModel(imageURL: "M02_MudHand", HP: 80, ATK: 10, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
+        MonsterModel(imageURL: "M03_LionWhat", HP: 150, ATK: 15, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
+        MonsterModel(imageURL: "M04_KidBlueDragon", HP: 200, ATK: 20, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
+        MonsterModel(imageURL: "M05_EyeWing", HP: 300, ATK: 35, DEF: 20, CRIT: 15, EVA: 20,isAlive:true),
+        MonsterModel(imageURL: "M06_PterosaurHerd", HP: 250, ATK: 25, DEF: 10, CRIT: 10, EVA: 10,isAlive:true)
     ]
     var stage: Int
+    var playerStage: PlayerModel
     var monsterStage: MonsterModel
     
     init(stage: Int) {
         self.stage = stage
-        playerModel = PlayerModel(imageURL: "Player2", HP: 1000, ATK: 100, DEF: 20, CRIT: 15, EVA: 10,istrue:true)
+        playerStage = playerModelList[stage]
         monsterStage = monsterModelList[stage]
     }
     
@@ -31,7 +33,7 @@ struct ModelStage {
         monsterStage = monsterModelList[stage]
     }
     func getPlayerModel() -> PlayerModel {
-        return playerModel
+        return playerStage
     }
     func getMonsterModel() -> MonsterModel {
         return monsterStage
@@ -40,7 +42,7 @@ struct ModelStage {
         return monsterStage.imageURL
     }
     func getHpPlayer() -> Int {
-        return playerModel.HP
+        return playerStage.HP
     }
     func getHpMonster() -> Int {
         return monsterStage.HP
@@ -53,8 +55,8 @@ struct ModelStage {
         return arc4random_uniform(100) < percentage
     }
     mutating func atkToMonster() {
-        let atkPlayer = playerModel.ATK
-        let critPlayer = playerModel.CRIT
+        let atkPlayer = playerStage.ATK
+        let critPlayer = playerStage.CRIT
         let hpMonster = monsterStage.HP
         let defMonster = monsterStage.DEF
         let evaMonster = 100-monsterStage.EVA
@@ -66,26 +68,26 @@ struct ModelStage {
                 monsterStage.HP = hpMonster - Int(randomAtk(Atk: atkPlayer)*((100.0 - Double(defMonster))/100.0))
             }
             if monsterStage.HP <= 0{
-                monsterStage.istrue = false
+                monsterStage.isAlive = false
             }
         }
     }
     mutating func atkToPlayer() {
         let atkMonster = monsterStage.ATK
         let critMonster = monsterStage.CRIT
-        let hpPlayer = playerModel.HP
-        let defPlayer = playerModel.DEF
-        let evaPlayer = 100-playerModel.EVA
+        let hpPlayer = playerStage.HP
+        let defPlayer = playerStage.DEF
+        let evaPlayer = 100-playerStage.EVA
         if randomPersent(percentage: evaPlayer){
             print(randomPersent(percentage: evaPlayer))
             if randomPersent(percentage: critMonster){
-                playerModel.HP = hpPlayer - Int(randomAtk(Atk: atkMonster)*((100.0 - Double(defPlayer))/100.0))*2
+                playerStage.HP = hpPlayer - Int(randomAtk(Atk: atkMonster)*((100.0 - Double(defPlayer))/100.0))*2
             }
             else{
-                playerModel.HP = hpPlayer - Int(randomAtk(Atk: atkMonster)*((100.0 - Double(defPlayer))/100.0))
+                playerStage.HP = hpPlayer - Int(randomAtk(Atk: atkMonster)*((100.0 - Double(defPlayer))/100.0))
             }
-            if playerModel.HP <= 0{
-                playerModel.istrue = false
+            if playerStage.HP <= 0{
+                playerStage.isAlive = false
             }
         }
     }
@@ -100,7 +102,7 @@ struct PlayerModel: Identifiable {
     var DEF: Int
     var CRIT: Int
     var EVA: Int
-    var istrue: Bool
+    var isAlive: Bool
 }
 
 struct MonsterModel: Identifiable {
@@ -111,5 +113,5 @@ struct MonsterModel: Identifiable {
     var DEF: Int
     var CRIT: Int
     var EVA: Int
-    var istrue: Bool
+    var isAlive: Bool
 }

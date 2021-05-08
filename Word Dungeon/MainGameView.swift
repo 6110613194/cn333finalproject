@@ -40,7 +40,7 @@ struct MainGameView: View {
                                     .frame(width: 40, height: 40)
                                 Text("HP : \(gameData.modelStage.getHpPlayer())").font(.title).bold().italic()
                             }
-                            if gameData.modelStage.getPlayerModel().istrue{
+                            if gameData.modelStage.getPlayerModel().isAlive{
                                 Image("Player2")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -61,7 +61,7 @@ struct MainGameView: View {
                                     .resizable()
                                     .frame(width: 40, height: 40)
                             }
-                            if gameData.modelStage.getMonsterModel().istrue{
+                            if gameData.modelStage.getMonsterModel().isAlive{
                                 Image(gameData.modelStage.getMonsterPic())
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -115,8 +115,11 @@ struct MainGameView: View {
                                         if gameData.checkAnswer(onTap: obj.content){ //vocab is true
                                             gameData.setAnswerShow(onTap: obj.content) //show Answer
                                             gameData.setAlphaShow(onTap: obj.content) //close Alpha
-                                            if gameData.vocabularyStage.iscomplete(){
+                                            if gameData.vocabularyStage.isComplete(){
                                                 gameData.modelStage.atkToMonster()
+                                                if gameData.modelStage.monsterStage.isAlive {
+                                                    gameData.stageNewVocab()
+                                                }
                                             }
                                         }else{
                                             gameData.modelStage.atkToPlayer()
@@ -136,7 +139,7 @@ struct MainGameView: View {
                         
                     }
                     HStack{
-                        if gameData.modelStage.getMonsterModel().istrue{
+                        if gameData.modelStage.getMonsterModel().isAlive{
                             Image("")
                                 .resizable()
                                 .frame(width: 150, height: 75, alignment: .center)
