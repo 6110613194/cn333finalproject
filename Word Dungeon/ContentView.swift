@@ -16,8 +16,8 @@ struct ContentView: View {
         }else if showingGame == "status"{
             StatusGameView(showingGame: $showingGame)
         }
-        else if showingGame == "pause"{
-            PauseGameView(showingGame: $showingGame)
+        else if showingGame == "gameover"{
+            GameOverView(showingGame: $showingGame)
         }
         else {
             HomeScreenView(showingGame: $showingGame)

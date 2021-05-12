@@ -12,7 +12,7 @@ struct MainGameView: View {
     @ObservedObject var gameData = GameData()
     @State var stage = 0
     @Binding var showingGame: String
-    
+    @State var showpause = false
     let gridcolumn = [GridItem(.flexible()),
                       GridItem(.flexible()),
                       GridItem(.flexible()),
@@ -24,14 +24,27 @@ struct MainGameView: View {
         GeometryReader { geometry in
             VStack {
                 VStack { //HalfTop
+                    Menu{
+                        Button("Resume", action: resume)
+                        Button("Exit", action: exit)
+                        
+                    }label:{
+                        HStack{
+                            Image("MENU")
+                                .resizable()
+                                .frame(width: 70, height: 70)
+                        }
+                    }.position(x: geometry.size.width-50, y: 75)
+                    /*
                     Button (action: {
-                        showingGame = "pause"
+                        self.showpause.toggle()
                     }){
                         Image("MENU")
                             .resizable()
                             .frame(width: 70, height: 70)
                     }
                     .position(x: geometry.size.width-50, y: 75)
+                    */
                     HStack {
                         VStack {
                             HStack{
@@ -119,10 +132,15 @@ struct MainGameView: View {
                                                 gameData.modelStage.atkToMonster()
                                                 if gameData.modelStage.monsterStage.isAlive {
                                                     gameData.stageNewVocab()
+                                                    
                                                 }
                                             }
                                         }else{
                                             gameData.modelStage.atkToPlayer()
+                                            print("iti")
+                                            if gameData.isGameOver(){
+                                                showingGame = "gameover"
+                                            }
                                         }
                                     }){
                                         Image(obj.content)
@@ -139,6 +157,11 @@ struct MainGameView: View {
                         
                     }
                     HStack{
+                        Button(action: {
+                            gameData.vocabularyStage.gettest()
+                        }){
+                            /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
+                        }
                         if gameData.modelStage.getMonsterModel().isAlive{
                             Image("")
                                 .resizable()
@@ -146,7 +169,10 @@ struct MainGameView: View {
                         }
                         else{
                             Button(action:{
+                        
+                                
                                 gameData.stageChanger()
+                                print(gameData.modelStage.getPlayerModelList())
                                 //showingGame = "status"
                             }) {
                                 Image("CONTINUE")
@@ -167,13 +193,50 @@ struct MainGameView: View {
             
         }.edgesIgnoringSafeArea(.all)
     }
+    func resume() {}
+    func exit() {
+        showingGame = ""
+    }
+    func cancelOrder() { }
 }
+
+struct Pause: View {
+    @Binding var showingGame: String
+    var body: some View {
+        VStack {
+            Button(action:{
+                showingGame = "play"
+            }){
+                Image("RESUME")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 200, height: 60)
+            }
+            .padding()
+            Button(action:{
+                showingGame = ""
+            }){
+                Image("MAIN_MANU")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 200, height: 60)
+            }
+        }
+        .background(Image("BR02")
+                        .resizable()
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all))
+        
+    }
+}
+
 
 /*struct AlphabetButton: View {
  
  }*/
 /*struct MainGameView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainGameView(showingGame: .constant("play"))
-    }
-}*/
+ static var previews: some View {
+ MainGameView(showingGame: .constant("play"))
+ }
+ }*/

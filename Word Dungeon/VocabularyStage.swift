@@ -8,10 +8,8 @@
 import Foundation
 
 struct VocabularyStage{
-    private let vocabularyList = [["CAT","DOG","ANT"],
-                                  ["BIRD","KING","GANK"],
-                                  ["WHOSE","OMEGA","ABOUT"],
-                                  ["STUDIO","VISUAL","IMPACT"]]
+    var readvocab = ReadVocabFile()
+    private var vocabularyList = [[String]]()
     var stage: Int
     var vocabStageList: [String] = []
     var vocabStageShow: [String] = []
@@ -20,6 +18,7 @@ struct VocabularyStage{
     
     init(stage: Int){
         self.stage = stage
+        vocabularyList = readvocab.getuseword()
         vocabAnswer = vocabularyList[stage].shuffled()[0]
         vocabStageList = vocabAnswer.map{
             String($0)
@@ -43,6 +42,9 @@ struct VocabularyStage{
             }
         }
         return complete
+    }
+    func gettest(){
+        print(vocabStageList)
     }
 }
 struct CharacterObj: Identifiable {

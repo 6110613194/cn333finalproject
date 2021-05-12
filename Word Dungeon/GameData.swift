@@ -20,7 +20,7 @@ class GameData: ObservableObject {
     }
     
     func stageChanger() {
-        self.stage = self.stage + 1
+        stage = stage + 1
         vocabularyStage = VocabularyStage(stage: stage)
         modelStage = ModelStage(stage: stage)
         alphabet = Alphabet(stage: stage)
@@ -60,9 +60,23 @@ class GameData: ObservableObject {
             i += 1
         }
     }
+    func isGameOver() -> Bool{
+        var gameover = false
+        if modelStage.getHpPlayer() < 0{
+            gameover = true
+        }
+        return gameover
+    }
+    func isGameWin() -> Bool{
+        var gameover = false
+        if modelStage.getHpMonster() < 0{
+            
+        }
+        return gameover
+    }
+    
     
     func createAnswerCard() {
-        
     }
     
 }

@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2076DC7E264650E200299EC3 /* vocab.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2076DC7D264650E200299EC3 /* vocab.txt */; };
-		2076DC81264651EC00299EC3 /* ReadVocabFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2076DC80264651EB00299EC3 /* ReadVocabFile.swift */; };
+		4E0E9E4D264C54B8000B9654 /* ReadVocabFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0E9E4C264C54B8000B9654 /* ReadVocabFile.swift */; };
 		68B62F8C087186FA87C6B254 /* Pods_Word_Dungeon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990A627FE78F462C6207018C /* Pods_Word_Dungeon.framework */; };
 		F929A26126446FF800398585 /* StatusGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F929A26026446FF800398585 /* StatusGameView.swift */; };
-		F929A26726447D8300398585 /* PauseGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F929A26626447D8300398585 /* PauseGameView.swift */; };
+		F929A26726447D8300398585 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F929A26626447D8300398585 /* GameOverView.swift */; };
 		F929A26A2644858F00398585 /* ModelStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F929A2692644858F00398585 /* ModelStage.swift */; };
 		F96929B3263D4AC2006A9D0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96929B2263D4AC2006A9D0F /* AppDelegate.swift */; };
 		F96929B5263D4AC2006A9D0F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96929B4263D4AC2006A9D0F /* SceneDelegate.swift */; };
@@ -30,12 +30,12 @@
 
 /* Begin PBXFileReference section */
 		2076DC7D264650E200299EC3 /* vocab.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vocab.txt; sourceTree = "<group>"; };
-		2076DC80264651EB00299EC3 /* ReadVocabFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadVocabFile.swift; sourceTree = "<group>"; };
+		4E0E9E4C264C54B8000B9654 /* ReadVocabFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadVocabFile.swift; sourceTree = "<group>"; };
 		91DA267142ED09740772671E /* Pods-Word Dungeon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Word Dungeon.release.xcconfig"; path = "Target Support Files/Pods-Word Dungeon/Pods-Word Dungeon.release.xcconfig"; sourceTree = "<group>"; };
 		990A627FE78F462C6207018C /* Pods_Word_Dungeon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Word_Dungeon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A7D8178B0CA9D55B2E8873 /* Pods-Word Dungeon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Word Dungeon.debug.xcconfig"; path = "Target Support Files/Pods-Word Dungeon/Pods-Word Dungeon.debug.xcconfig"; sourceTree = "<group>"; };
 		F929A26026446FF800398585 /* StatusGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusGameView.swift; sourceTree = "<group>"; };
-		F929A26626447D8300398585 /* PauseGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseGameView.swift; sourceTree = "<group>"; };
+		F929A26626447D8300398585 /* GameOverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		F929A2692644858F00398585 /* ModelStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelStage.swift; sourceTree = "<group>"; };
 		F96929AF263D4AC2006A9D0F /* Word Dungeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Word Dungeon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F96929B2263D4AC2006A9D0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,12 +112,12 @@
 				F96929B4263D4AC2006A9D0F /* SceneDelegate.swift */,
 				F96929B6263D4AC2006A9D0F /* ContentView.swift */,
 				2076DC7D264650E200299EC3 /* vocab.txt */,
-				F929A26626447D8300398585 /* PauseGameView.swift */,
+				F929A26626447D8300398585 /* GameOverView.swift */,
+				4E0E9E4C264C54B8000B9654 /* ReadVocabFile.swift */,
 				F929A26026446FF800398585 /* StatusGameView.swift */,
 				F96929B8263D4AC3006A9D0F /* Assets.xcassets */,
 				F96ACD3B2644127F00981F5F /* MainGameView.swift */,
 				F96ACD3E2644136200981F5F /* HomeScreenView.swift */,
-				2076DC80264651EB00299EC3 /* ReadVocabFile.swift */,
 				F96ACD382644127600981F5F /* VocabularyStage.swift */,
 				F96929BD263D4AC3006A9D0F /* LaunchScreen.storyboard */,
 				F96929C7263D4BBE006A9D0F /* GoogleService-Info.plist */,
@@ -252,12 +252,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F929A26A2644858F00398585 /* ModelStage.swift in Sources */,
-				F929A26726447D8300398585 /* PauseGameView.swift in Sources */,
+				F929A26726447D8300398585 /* GameOverView.swift in Sources */,
 				F96929B3263D4AC2006A9D0F /* AppDelegate.swift in Sources */,
 				F96ACD362644123100981F5F /* GameData.swift in Sources */,
 				F9D1B994263D549F00800E12 /* GameRepository.swift in Sources */,
 				F96ACD3F2644136200981F5F /* HomeScreenView.swift in Sources */,
-				2076DC81264651EC00299EC3 /* ReadVocabFile.swift in Sources */,
+				4E0E9E4D264C54B8000B9654 /* ReadVocabFile.swift in Sources */,
 				F929A26126446FF800398585 /* StatusGameView.swift in Sources */,
 				F96ACD3C2644127F00981F5F /* MainGameView.swift in Sources */,
 				F96929B5263D4AC2006A9D0F /* SceneDelegate.swift in Sources */,

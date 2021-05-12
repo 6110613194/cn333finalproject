@@ -9,9 +9,9 @@ import Foundation
 
 struct ModelStage {
     private var playerModelList: [PlayerModel] = [
-        PlayerModel(imageURL: "Player2", HP: 1000, ATK: 100, DEF: 20, CRIT: 15, EVA: 10,isAlive:true)]
+        PlayerModel(imageURL: "Player2", HP: 1000, ATK: 1000, DEF: 20, CRIT: 15, EVA: 10,isAlive:true)]
     private var monsterModelList: [MonsterModel] = [
-        MonsterModel(imageURL: "M01_GreenPoring", HP: 500, ATK: 2, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
+        MonsterModel(imageURL: "M01_GreenPoring", HP: 500, ATK: 200, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
         MonsterModel(imageURL: "M02_MudHand", HP: 80, ATK: 10, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
         MonsterModel(imageURL: "M03_LionWhat", HP: 150, ATK: 15, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
         MonsterModel(imageURL: "M04_KidBlueDragon", HP: 200, ATK: 20, DEF: 1, CRIT: 1, EVA: 1,isAlive:true),
@@ -24,6 +24,10 @@ struct ModelStage {
     
     init(stage: Int) {
         self.stage = stage
+        if stage != 0 {
+            var createplayobj = playerModelList[stage-1]
+            playerModelList.append(createplayobj)
+        }
         playerStage = playerModelList[stage]
         monsterStage = monsterModelList[stage]
     }
@@ -35,6 +39,9 @@ struct ModelStage {
     func getPlayerModel() -> PlayerModel {
         return playerStage
     }
+    func getPlayerModelList() -> [PlayerModel] {
+        return playerModelList
+    }
     func getMonsterModel() -> MonsterModel {
         return monsterStage
     }
@@ -44,6 +51,22 @@ struct ModelStage {
     func getHpPlayer() -> Int {
         return playerStage.HP
     }
+    func getImgPlayer() -> String {
+        return playerStage.imageURL
+    }
+    func getAtkPlayer() -> Int {
+        return playerStage.ATK
+    }
+    func getDefPlayer() -> Int {
+        return playerStage.HP
+    }
+    func getEvaPlayer() -> Int {
+        return playerStage.EVA
+    }
+    func getCritPlayer() -> Int {
+        return playerStage.CRIT
+    }
+    
     func getHpMonster() -> Int {
         return monsterStage.HP
     }
@@ -53,7 +76,11 @@ struct ModelStage {
     }
     func randomPersent(percentage :Int) -> Bool {
         return arc4random_uniform(100) < percentage
-    }
+    }/*
+    mutating func createstateplayer(stage: Int){
+        var createplayobj = PlayerModel(id: UUID(), imageURL: getImgPlayer(), HP: getHpPlayer(), ATK: getAtkPlayer(), DEF: getDefPlayer(), CRIT: getCritPlayer(), EVA: getCritPlayer(), isAlive: true)
+        playerModelList.append(createplayobj)
+    }*/
     mutating func atkToMonster() {
         let atkPlayer = playerStage.ATK
         let critPlayer = playerStage.CRIT

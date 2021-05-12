@@ -8,21 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct PauseGameView: View {
+struct GameOverView: View {
     @Binding var showingGame: String
     @State var stage = 0
     
     var body: some View {
         VStack {
-            Button(action:{
-                showingGame = "play"
-            }){
-                Image("RESUME")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 200, height: 60)
-            }
-            .padding()
+            Text("GAME OVER").font(.title).background(Color.white)
             Button(action:{
                 showingGame = ""
             }){
