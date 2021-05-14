@@ -37,7 +37,8 @@ struct ModelStage {
         MonsterModel(imageURL: "M18_BladeDragon_Shadow", HP: 210, ATK: 45, DEF: 10, CRIT: 20, EVA: 10, isAlive: true),
         MonsterModel(imageURL: "M19_JokerGirl_Shadow", HP: 235, ATK: 35, DEF: 5, CRIT: 35, EVA: 10, isAlive: true),
         MonsterModel(imageURL: "M20_WhiteKingDragon_Shadow", HP: 350, ATK: 100, DEF: 50, CRIT: 15, EVA: 10, isAlive: true),
-        MonsterModel(imageURL: "M21_SkullMage_Shadow", HP: 200, ATK: 50, DEF: 10, CRIT: 10, EVA: 10, isAlive: true)
+        MonsterModel(imageURL: "M21_SkullMage_Shadow", HP: 200, ATK: 50, DEF: 10, CRIT: 10, EVA: 10, isAlive: true),
+        MonsterModel(imageURL: "M22_ShadowGank_Shadow", HP: 125, ATK: 25, DEF: 1, CRIT: 5, EVA: 15, isAlive: true)
     ]
     var stage: Int
     var playerStage: PlayerModel
