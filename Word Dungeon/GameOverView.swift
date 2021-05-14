@@ -5,7 +5,7 @@
 //  Created by Teerat Prasitwet on 5/5/21.
 //
 
-import Foundation
+/*import Foundation
 import SwiftUI
 
 struct GameOverView: View {
@@ -31,7 +31,7 @@ struct GameOverView: View {
                         .edgesIgnoringSafeArea(.all))
         
     }
-}
+}*/
 
 /*struct PauseGameView_Previews: PreviewProvider {
     static var previews: some View {

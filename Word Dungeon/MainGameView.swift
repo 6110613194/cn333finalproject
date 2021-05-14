@@ -12,7 +12,11 @@ struct MainGameView: View {
     @ObservedObject var gameData = GameData()
     @State var stage = 0
     @Binding var showingGame: String
+    @Binding var loadSave: Bool
     @State var showpause = false
+    //Firebase
+    @ObservedObject var gameRepository = GameRepository()
+    
     let gridcolumn = [GridItem(.flexible()),
                       GridItem(.flexible()),
                       GridItem(.flexible()),
@@ -24,27 +28,39 @@ struct MainGameView: View {
         GeometryReader { geometry in
             VStack {
                 VStack { //HalfTop
-                    Menu{
-                        Button("RESUME", action: resume)
-                        Button("MAIN MENU", action: main_menu)
-                        
-                    }label:{
-                        HStack{
-                            Image("MENU")
+                    if loadSave {
+                        Button(action: {
+                            gameData.setContinue(stage: gameRepository.getStage(), HP: gameRepository.getHp(), ATK: gameRepository.getAtk(), DEF: gameRepository.getDef(), CRIT: gameRepository.getCri(), EVA: gameRepository.getEva())
+                            loadSave.toggle()
+                        }){
+                            Image("CONFIRM_HALF")
                                 .resizable()
-                                .frame(width: 70, height: 70)
+                                .frame(width: 120, height: 60)
                         }
-                    }.position(x: geometry.size.width-50, y: 75)
-                    /*
-                    Button (action: {
-                        self.showpause.toggle()
-                    }){
+                        .position(x: geometry.size.width-200, y: 75)
+                    } else {
+                        Image("")
+                            .resizable()
+                            .frame(width: 120, height: 60)
+                            .position(x: geometry.size.width-200, y: 75)
+                    }
+                    NavigationLink(
+                        destination: PauseGameView(showingGame: $showingGame)
+                    ){
                         Image("MENU")
                             .resizable()
                             .frame(width: 70, height: 70)
                     }
                     .position(x: geometry.size.width-50, y: 75)
-                    */
+                    if gameData.modelStage.playerStage.isAlive {
+                        Image("")
+                            .resizable()
+                            .frame(width: 100, height: 30)
+                    } else {
+                        Image("GAME OVER")
+                            .resizable()
+                            .frame(width: 100, height: 30)
+                    }
                     HStack {
                         VStack {
                             HStack{
@@ -54,7 +70,7 @@ struct MainGameView: View {
                                 Text("HP : \(gameData.modelStage.getHpPlayer())").font(.title).bold().italic()
                             }
                             if gameData.modelStage.getPlayerModel().isAlive{
-                                Image("Player")
+                                Image("Player_Shadow")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 160, height: 160)
@@ -78,13 +94,13 @@ struct MainGameView: View {
                                 Image(gameData.modelStage.getMonsterPic())
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 160, height: 160)
+                                    .frame(width: 200, height: 220)
                             }
                             else{
                                 Image("")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 160, height: 160)
+                                    .frame(width: 200, height: 220)
                             }
                             
                         }
@@ -137,10 +153,6 @@ struct MainGameView: View {
                                             }
                                         }else{
                                             gameData.modelStage.atkToPlayer()
-                                            print("iti")
-                                            if gameData.isGameOver(){
-                                                showingGame = "gameover"
-                                            }
                                         }
                                     }){
                                         Image(obj.content)
@@ -168,17 +180,45 @@ struct MainGameView: View {
                                 .frame(width: 150, height: 75, alignment: .center)
                         }
                         else{
-                            Button(action:{
-                                if ((gameData.stage + 1) % 5) != 0 {
-                                    gameData.stageChanger()
-                                } else {
-                                    gameData.stageChangerNewMap()
+                            if ((gameData.stage + 1) % 5) != 0 {
+                                HStack {
+                                    Button(action: {
+                                        gameData.stageChanger()
+                                        gameRepository.remove(at: 0)
+                                        gameRepository.newsaveplayer(stage: gameData.stage, hp: gameData.modelStage.getHpPlayer(), atk: gameData.modelStage.getAtkPlayer(), def: gameData.modelStage.getDefPlayer(), cri: gameData.modelStage.getCritPlayer(), eva: gameData.modelStage.getEvaPlayer())
+                                    }) {
+                                        Image("NEXT_STAGE")
+                                            .resizable()
+                                            .frame(width: 200, height: 60)
+                                    }
                                 }
-                                //showingGame = "status"
-                            }) {
-                                Image("CONTINUE")
-                                    .resizable()
-                                    .frame(width: 150, height: 75, alignment: .center)
+                            } else if (gameData.modelStage.playerStage.isAlive == false){
+                                Button(action: {
+                                    gameRepository.remove(at: 0)
+                                    gameRepository.newsaveplayer(stage: gameData.stage, hp: gameData.modelStage.getHpPlayer(), atk: gameData.modelStage.getAtkPlayer(), def: gameData.modelStage.getDefPlayer(), cri: gameData.modelStage.getCritPlayer(), eva: gameData.modelStage.getEvaPlayer())
+                                    showingGame = ""
+                                }){
+                                    Image("MAIN_MENU")
+                                        .resizable()
+                                        .frame(width: 200, height: 60)
+                                }
+                            } else {
+                                Button(action: {
+                                    gameData.stageChangerNewMap()
+                                    gameRepository.remove(at: 0)
+                                    gameRepository.newsaveplayer(stage: gameData.stage, hp: gameData.modelStage.getHpPlayer(), atk: gameData.modelStage.getAtkPlayer(), def: gameData.modelStage.getDefPlayer(), cri: gameData.modelStage.getCritPlayer(), eva: gameData.modelStage.getEvaPlayer())
+                                }){
+                                    Image("NEXT_STAGE_HALF")
+                                        .resizable()
+                                        .frame(width: 120, height: 60)
+                                }
+                                NavigationLink(
+                                    destination: StatusGameView()
+                                ){
+                                    Image("STATUS_UPGRADE_GO")
+                                        .resizable()
+                                        .frame(width: 120, height: 60)
+                                }
                             }
                         }
                         
@@ -236,8 +276,8 @@ struct Pause: View {
 /*struct AlphabetButton: View {
  
  }*/
-/*struct MainGameView_Previews: PreviewProvider {
- static var previews: some View {
- MainGameView(showingGame: .constant("play"))
- }
- }*/
+struct MainGameView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainGameView(showingGame: .constant("play"), loadSave: .constant(true))
+    }
+}

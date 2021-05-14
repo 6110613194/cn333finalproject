@@ -19,6 +19,18 @@ class GameData: ObservableObject {
         return vocabLine
     }
     
+    func setContinue(stage: Int, HP: Int, ATK: Int, DEF: Int, CRIT: Int, EVA: Int) {
+        self.stage = stage
+        vocabularyStage = VocabularyStage(stage: stage)
+        alphabet = Alphabet(stage: stage)
+        modelStage.stage = stage
+        modelStage.addStagePlayer(iHP: HP, iATK: ATK, iDEF: DEF, iCRIT: CRIT, iEVA: EVA)
+    }
+    
+    func setStage(stage: Int) {
+        self.stage = stage
+    }
+    
     func stageChanger() {
         stage = stage + 1
         vocabularyStage = VocabularyStage(stage: stage)
@@ -30,7 +42,8 @@ class GameData: ObservableObject {
         stage = stage + 1
         vocabularyStage = VocabularyStage(stage: stage)
         alphabet = Alphabet(stage: stage)
-        modelStage = ModelStage(stage: stage)
+        modelStage.changePlayer(stage: stage)
+        modelStage.changeMonster(stage: stage)
     }
     
     func stageNewVocab() {
